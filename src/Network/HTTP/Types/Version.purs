@@ -1,4 +1,12 @@
-module Network.HTTP.Types.Version where 
+module Network.HTTP.Types.Version 
+    ( HttpVersion
+    , http09
+    , http10
+    , http11
+    , http20
+    , mkHttpVersion
+    ) 
+    where 
 
 import Prelude 
 
@@ -9,6 +17,7 @@ newtype HttpVersion
                   , minor :: Int
                   }
 
+derive instance eqHttpVersion :: Eq HttpVersion
 instance showHttpVersion :: Show HttpVersion where
     show (HttpVersion {major, minor}) = "HTTP/" <> show major <> "." <> show minor
 
@@ -27,3 +36,6 @@ http11 = HttpVersion { major: 1, minor: 1 }
 -- | HTTP 2.0
 http20 :: HttpVersion
 http20 = HttpVersion { major: 2, minor: 0 }
+
+mkHttpVersion :: Int -> Int -> HttpVersion
+mkHttpVersion major minor = HttpVersion { major, minor }
