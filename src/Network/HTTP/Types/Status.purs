@@ -8,6 +8,26 @@ type Status
 status200 :: Status 
 status200 = { code: 200, message: "ok" } 
 
+-- | Moved Permanently 301
+status301 :: Status
+status301 = { code: 301, message: "moved permanently" }
+
+-- | Not Modified 304
+status304 :: Status
+status304 = { code: 304, message: "not modified" }
+
+  -- | Use Proxy 305
+status305 :: Status
+status305 = { code: 305, message: "use proxy" }
+
+-- | Temporary Redirect 307
+status307 :: Status
+status307 = { code: 307, message: "temporary redirect" }
+
+-- | Permanent Redirect 308
+status308 :: Status
+status308 = { code: 308, message: "permanent redirect" }
+
 -- | Bad Request
 status400 :: Status
 status400 = { code: 400 , message: "bad request" }
