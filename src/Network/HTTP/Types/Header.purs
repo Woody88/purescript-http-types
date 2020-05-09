@@ -6,8 +6,8 @@ import Data.Array (cons)
 import Data.Char.Unicode (isDigit)
 import Data.Generic.Rep (class Generic)
 import Data.Generic.Rep.Show (genericShow)
-import Data.Int as Int
 import Data.Maybe (Maybe(..))
+import Data.Number as Number
 import Data.String (Pattern(..), drop, length, null, stripPrefix, take)
 import Data.String.CodeUnits (takeWhile)
 import Data.Tuple (Tuple(..))
@@ -167,9 +167,9 @@ hWarning :: HeaderName
 hWarning = "Warning"
 
 data ByteRange
-  = ByteRangeFrom Int 
-  | ByteRangeFromTo Int Int
-  | ByteRangeSuffix Int
+  = ByteRangeFrom Number 
+  | ByteRangeFromTo Number Number
+  | ByteRangeSuffix Number
 
 -- | RFC 2616 Byte ranges (set).
 type ByteRanges = Array ByteRange
@@ -187,12 +187,12 @@ parseByteRanges str = do
   ranges (cons r) str3
   where 
     range str2 = do 
-      (i /\ str3) <- readInt str2 
-      if i < 0
+      (i /\ str3) <- readNumber str2 
+      if i < 0.0
       then Just (ByteRangeSuffix i /\ str3)
       else do
         str4 <- stripPrefix (Pattern "-") str3
-        case readInt str4 of  
+        case readNumber str4 of  
           Just (j /\ str5) | j >= i -> Just (ByteRangeFromTo i j /\ str5)
           _ -> Just (ByteRangeFrom i /\ str4)
 
@@ -210,8 +210,8 @@ parseByteRanges str = do
 -- Just (Tuple -500 ", test2")
 -- >>> readInt "error"
 -- Nothing
-readInt :: String -> Maybe (Tuple Int String)
-readInt str
+readNumber :: String -> Maybe (Tuple Number String)
+readNumber str
   | null str = Nothing 
   | otherwise = do 
       let 
@@ -221,6 +221,6 @@ readInt str
           then negDash <> (takeWhile isDigit $ drop 1 str)
           else takeWhile isDigit str
 
-      i <- Int.fromString ints 
+      i <- Number.fromString ints 
       pure $ 
         Tuple i (drop (length ints) str)
