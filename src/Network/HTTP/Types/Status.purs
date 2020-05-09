@@ -5,8 +5,13 @@ type Status
       , message :: String 
       }
 
+-- | OK 200
 status200 :: Status 
 status200 = { code: 200, message: "ok" } 
+
+-- | Partial Content 206
+status206 :: Status
+status206 = { code: 206, message: "Partial Content" }  
 
 -- | Moved Permanently 301
 status301 :: Status
