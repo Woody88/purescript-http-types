@@ -8,7 +8,9 @@ import Data.Generic.Rep (class Generic)
 import Data.Generic.Rep.Show (genericShow)
 import Data.Int as Int
 import Data.Maybe (Maybe(..))
+import Data.Newtype (wrap)
 import Data.String (Pattern(..), drop, length, null, stripPrefix, take)
+import Data.String.CaseInsensitive (CaseInsensitiveString)
 import Data.String.CodeUnits (takeWhile)
 import Data.Tuple (Tuple(..))
 import Data.Tuple.Nested ((/\))
@@ -17,7 +19,7 @@ import Data.Tuple.Nested ((/\))
 type Header = Tuple HeaderName String
 
 -- | Header name
-type HeaderName = String 
+type HeaderName = CaseInsensitiveString 
 
 -- | Request Headers
 type RequestHeaders = Array Header
@@ -26,145 +28,145 @@ type RequestHeaders = Array Header
 type ResponseHeaders = Array Header
 
 hAccept :: HeaderName
-hAccept = "Accept"
+hAccept = wrap "Accept"
 
 hAcceptCharset :: HeaderName
-hAcceptCharset = "Accept-Charset"
+hAcceptCharset = wrap "Accept-Charset"
 
 hAcceptEncoding :: HeaderName
-hAcceptEncoding = "Accept-Encoding"
+hAcceptEncoding = wrap "Accept-Encoding"
 
 hAcceptLanguage :: HeaderName
-hAcceptLanguage = "Accept-Language"
+hAcceptLanguage = wrap "Accept-Language"
 
 hAcceptRanges :: HeaderName
-hAcceptRanges = "Accept-Ranges"
+hAcceptRanges = wrap "Accept-Ranges"
 
 hAge :: HeaderName
-hAge = "Age"
+hAge = wrap "Age"
 
 hAllow :: HeaderName
-hAllow = "Allow"
+hAllow = wrap "Allow"
 
 hAuthorization :: HeaderName
-hAuthorization = "Authorization"
+hAuthorization = wrap "Authorization"
 
 hCacheControl :: HeaderName
-hCacheControl  = "Cache-Control"
+hCacheControl  = wrap "Cache-Control"
 
 hConnection :: HeaderName
-hConnection = "Connection"
+hConnection = wrap "Connection"
 
 hContentEncoding :: HeaderName
-hContentEncoding = "Content-Encoding"
+hContentEncoding = wrap "Content-Encoding"
 
 hContentLanguage :: HeaderName
-hContentLanguage = "Content-Language"
+hContentLanguage = wrap "Content-Language"
 
 hContentLength :: HeaderName
-hContentLength = "Content-Length"
+hContentLength = wrap "Content-Length"
 
 hContentLocation :: HeaderName
-hContentLocation = "Content-Location"
+hContentLocation = wrap "Content-Location"
 
 hContentMD5 :: HeaderName
-hContentMD5 = "Content-MD5"
+hContentMD5 = wrap "Content-MD5"
 
 hContentRange :: HeaderName
-hContentRange = "Content-Range"
+hContentRange = wrap "Content-Range"
 
 hContentType :: HeaderName
-hContentType = "Content-Type"
+hContentType = wrap "Content-Type"
 
 hDate :: HeaderName
-hDate = "Date"
+hDate = wrap "Date"
 
 hETag :: HeaderName
-hETag = "ETag"
+hETag = wrap "ETag"
 
 hExpect :: HeaderName
-hExpect = "Expect"
+hExpect = wrap "Expect"
 
 hExpires :: HeaderName
-hExpires = "Expires"
+hExpires = wrap "Expires"
 
 hFrom :: HeaderName
-hFrom = "From"
+hFrom = wrap "From"
 
 hHost :: HeaderName
-hHost = "Host"
+hHost = wrap "Host"
 
 hIfMatch :: HeaderName
-hIfMatch = "If-Match"
+hIfMatch = wrap "If-Match"
 
 hIfModifiedSince :: HeaderName
-hIfModifiedSince = "If-Modified-Since"
+hIfModifiedSince = wrap "If-Modified-Since"
 
 hIfNoneMatch :: HeaderName
-hIfNoneMatch = "If-None-Match"
+hIfNoneMatch = wrap "If-None-Match"
 
 hIfRange :: HeaderName
-hIfRange = "If-Range"
+hIfRange = wrap "If-Range"
 
 hIfUnmodifiedSince :: HeaderName
-hIfUnmodifiedSince = "If-Unmodified-Since"
+hIfUnmodifiedSince = wrap "If-Unmodified-Since"
 
 hLastModified :: HeaderName
-hLastModified = "Last-Modified"
+hLastModified = wrap "Last-Modified"
 
 hLocation :: HeaderName
-hLocation = "Location"
+hLocation = wrap "Location"
 
 hMaxForwards :: HeaderName
-hMaxForwards = "Max-Forwards"
+hMaxForwards = wrap "Max-Forwards"
 
 hPragma :: HeaderName
-hPragma = "Pragma"
+hPragma = wrap "Pragma"
 
 hProxyAuthenticate :: HeaderName
-hProxyAuthenticate = "Proxy-Authenticate"
+hProxyAuthenticate = wrap "Proxy-Authenticate"
 
 hProxyAuthorization :: HeaderName
-hProxyAuthorization = "Proxy-Authorization"
+hProxyAuthorization = wrap "Proxy-Authorization"
 
 hRange :: HeaderName
-hRange = "Range"
+hRange = wrap "Range"
 
 hReferer :: HeaderName
-hReferer = "Referer"
+hReferer = wrap "Referer"
 
 hRetryAfter :: HeaderName
-hRetryAfter = "Retry-After"
+hRetryAfter = wrap "Retry-After"
 
 hServer :: HeaderName
-hServer = "Server"
+hServer = wrap "Server"
 
 hTE :: HeaderName
-hTE = "TE"
+hTE = wrap "TE"
 
 hTrailer :: HeaderName
-hTrailer = "Trailer"
+hTrailer = wrap "Trailer"
 
 hTransferEncoding :: HeaderName
-hTransferEncoding = "Transfer-Encoding"
+hTransferEncoding = wrap "Transfer-Encoding"
 
 hUpgrade :: HeaderName
-hUpgrade = "Upgrade"
+hUpgrade = wrap "Upgrade"
 
 hUserAgent :: HeaderName
-hUserAgent = "User-Agent"
+hUserAgent = wrap "User-Agent"
 
 hVary :: HeaderName
-hVary = "Vary"
+hVary = wrap "Vary"
 
 hVia :: HeaderName
-hVia = "Via"
+hVia = wrap "Via"
 
 hWWWAuthenticate :: HeaderName
-hWWWAuthenticate = "WWW-Authenticate"
+hWWWAuthenticate = wrap "WWW-Authenticate"
 
 hWarning :: HeaderName
-hWarning = "Warning"
+hWarning = wrap "Warning"
 
 data ByteRange
   = ByteRangeFrom Int 
