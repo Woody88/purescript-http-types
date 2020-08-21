@@ -1,9 +1,14 @@
 module Network.HTTP.Types.Method where 
 
-import Prelude 
--- | A list of common methods. If it's non-common, use the 'Custom'
+import Prelude
+
+import Data.Maybe (Maybe(..))
+
 -- | constructor.
-data Method = GET
+type Method = String 
+
+data StdMethod 
+    = GET
     | HEAD
     | POST
     | PUT
@@ -12,10 +17,8 @@ data Method = GET
     | OPTIONS
     | TRACE
     | PATCH
-    | Custom String
 
-
-instance showMethod :: Show Method where 
+instance showMethod :: Show StdMethod where 
     show = case _ of 
         GET        -> "GET"
         HEAD       -> "HEAD"
@@ -26,18 +29,42 @@ instance showMethod :: Show Method where
         OPTIONS    -> "OPTIONS"
         TRACE      -> "TRACE"
         PATCH      -> "PATCH"
-        (Custom v) -> v
 
+methodGet :: Method 
+methodGet = show GET
 
--- All HTTP Methods are case-sensitive.
-fromString :: String -> Method
-fromString "GET"     = GET
-fromString "HEAD"    = HEAD
-fromString "POST"    = POST
-fromString "PUT"     = PUT
-fromString "DELETE"  = DELETE
-fromString "CONNECT" = CONNECT
-fromString "OPTIONS" = OPTIONS
-fromString "TRACE"   = TRACE
-fromString "PATCH"   = PATCH
-fromString s         = Custom s
+methodPost :: Method 
+methodPost = show POST
+
+methodHead :: Method 
+methodHead = show HEAD
+
+methodPut :: Method 
+methodPut = show PUT
+
+methodDelete :: Method 
+methodDelete = show DELETE
+
+methodTrace :: Method 
+methodTrace = show TRACE
+
+methodConnect :: Method 
+methodConnect = show CONNECT
+
+methodOptions :: Method 
+methodOptions = show OPTIONS
+
+methodPatch :: Method 
+methodPatch = show PATCH
+
+parseMethod :: Method -> Maybe StdMethod
+parseMethod "GET"     = pure GET
+parseMethod "HEAD"    = pure HEAD
+parseMethod "POST"    = pure POST
+parseMethod "PUT"     = pure PUT
+parseMethod "DELETE"  = pure DELETE
+parseMethod "CONNECT" = pure CONNECT
+parseMethod "OPTIONS" = pure OPTIONS
+parseMethod "TRACE"   = pure TRACE
+parseMethod "PATCH"   = pure PATCH
+parseMethod _         = Nothing
