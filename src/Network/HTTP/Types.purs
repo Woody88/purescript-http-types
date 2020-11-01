@@ -1,6 +1,7 @@
 module Network.HTTP.Types 
     ( module Header 
     , module Method
+    , module URI
     , module Status
     , module Version
     )
@@ -8,6 +9,7 @@ module Network.HTTP.Types
 
 import Network.HTTP.Types.Header  (Header, HeaderName, RequestHeaders, ResponseHeaders, ByteRange (..), ByteRanges, parseByteRanges, hAccept, hAcceptCharset, hAcceptEncoding, hAcceptLanguage, hAcceptRanges, hAge, hAllow, hAuthorization, hCacheControl, hConnection, hContentEncoding, hContentLanguage, hContentLength, hContentLocation, hContentMD5, hContentRange, hContentType, hDate, hETag, hExpect, hExpires, hFrom, hHost, hIfMatch, hIfModifiedSince, hIfNoneMatch, hIfRange, hIfUnmodifiedSince, hLastModified, hLocation, hMaxForwards, hPragma, hProxyAuthenticate, hProxyAuthorization, hRange, hReferer, hRetryAfter, hServer, hTE, hTrailer, hTransferEncoding)  as Header
 import Network.HTTP.Types.Method  (Method, StdMethod(..), parseMethod) as Method  
+import Network.HTTP.Types.URI     (Query, QueryItem, parsePath, parseQuery) as URI  
 import Network.HTTP.Types.Version (HttpVersion, http09, http10, http11, http20) as Version 
 import Network.HTTP.Types.Status ( Status, accepted202, badGateway502, badRequest400, conflict409, created201, expectationFailed417, forbidden403, found302, gatewayTimeout504, gone410
                                  , httpVersionNotSupported505, imATeapot418, internalServerError500, lengthRequired411, methodNotAllowed405, movedPermanently301, multipleChoices300
