@@ -30,19 +30,19 @@ parsePath = unsafeDecodeURI >>> split "?" >>> first >>> split "/" >>> nonempty
     first = Array.head >>> fromMaybe ""
 
 -- | TODO: Need a solution for decoding url percent (%) and plus (+) characters. 
-parseQuery :: String -> Array (Tuple String String)
+parseQuery :: String -> Array (Tuple String (Maybe String))
 parseQuery "" = []
 parseQuery url = case split "?" (unsafeDecodeURI url) of 
   [_, ""] -> []
   [_, qstr] -> parseQueryString qstr
   otherwise -> []
   where 
-    parseQueryString = map (splitAt (flip Tuple "") "=") <<< String.split (Pattern "&")
+    parseQueryString = map (splitAt (flip Tuple Nothing) "=") <<< String.split (Pattern "&")
     second = case _ of 
             [_ , qstr] ->  qstr
             _         -> ""
     split = Pattern >>> String.split
     splitAt k p str =
         case String.indexOf (Pattern p) str of
-          Just i -> Tuple (String.take i str) (String.drop (i + String.length p) str)
+          Just i -> Tuple (String.take i str) (Just $ String.drop (i + String.length p) str)
           Nothing -> k str
