@@ -7,6 +7,22 @@ type Status
       , message :: String 
       }
 
+-- | Continue 100
+status100 :: Status
+status100 = { code: 100, message: "Continue" }
+
+-- | Continue 100
+continue100 :: Status
+continue100 = status100
+
+-- | Switching Protocols 101
+status101 :: Status
+status101 = { code: 101, message: "Switching Protocols" }
+
+-- | Switching Protocols 101
+switchingProtocols101 :: Status
+switchingProtocols101 = status101
+
 -- | OK 200
 status200 :: Status 
 status200 = { code: 200, message: "OK" } 
