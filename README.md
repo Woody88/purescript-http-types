@@ -3,7 +3,7 @@
 
 <div align="center">
   <h1>
-    <code>http-types</code>: Generic HTTP types for Purescript (for both client and server code).
+    <code>http-types</code>: Generic HTTP types for Purescript (for both client and server code)
   </h1>
 </div>
 
