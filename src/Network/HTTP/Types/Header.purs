@@ -3,15 +3,15 @@ module Network.HTTP.Types.Header where
 import Prelude
 
 import Data.Array (cons)
-import Data.Char.Unicode (isDigit)
+import Data.CodePoint.Unicode (isDecDigit)
 import Data.Generic.Rep (class Generic)
-import Data.Generic.Rep.Show (genericShow)
+import Data.Show.Generic (genericShow)
 import Data.Int as Int
 import Data.Maybe (Maybe(..))
 import Data.Newtype (wrap)
 import Data.String (Pattern(..), drop, length, null, stripPrefix, take)
 import Data.String.CaseInsensitive (CaseInsensitiveString)
-import Data.String.CodeUnits (takeWhile)
+import Data.String.CodePoints (takeWhile)
 import Data.Tuple (Tuple(..))
 import Data.Tuple.Nested ((/\))
 
@@ -220,8 +220,8 @@ readInt str
         negDash = take 1 str 
         ints = 
           if (negDash == "-")
-          then negDash <> (takeWhile isDigit $ drop 1 str)
-          else takeWhile isDigit str
+          then negDash <> (takeWhile isDecDigit $ drop 1 str)
+          else takeWhile isDecDigit str
 
       i <- Int.fromString ints 
       pure $ 

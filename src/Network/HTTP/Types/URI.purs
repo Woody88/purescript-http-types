@@ -7,7 +7,7 @@ import Data.Maybe (Maybe(..), fromMaybe)
 import Data.String (Pattern(..))
 import Data.String as String
 import Data.Tuple (Tuple(..))
-import Global.Unsafe (unsafeDecodeURI)
+import JSURI (decodeURIComponent)
 
 type QueryItem = Tuple String (Maybe String)
 
@@ -23,8 +23,9 @@ type Query = Array QueryItem
 -- | > pathInfo req 
 -- | [] 
 parsePath :: String -> Array String 
-parsePath = unsafeDecodeURI >>> split "?" >>> first >>> split "/" >>> nonempty 
+parsePath = decodeUri >>> split "?" >>> first >>> split "/" >>> nonempty 
   where
+    decodeUri u = (fromMaybe u $ decodeURIComponent u)
     nonempty = Array.filter ((/=) "")
     split = Pattern >>> String.split
     first = Array.head >>> fromMaybe ""
@@ -32,7 +33,7 @@ parsePath = unsafeDecodeURI >>> split "?" >>> first >>> split "/" >>> nonempty
 -- | TODO: Need a solution for decoding url percent (%) and plus (+) characters. 
 parseQuery :: String -> Array (Tuple String (Maybe String))
 parseQuery "" = []
-parseQuery url = case split "?" (unsafeDecodeURI url) of 
+parseQuery url = case split "?" (fromMaybe url $ decodeURIComponent url) of 
   [_, ""] -> []
   [_, qstr] -> parseQueryString qstr
   otherwise -> []
